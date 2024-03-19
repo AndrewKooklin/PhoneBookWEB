@@ -5,33 +5,42 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PhoneBookWEB.Domain;
+using PhoneBookWEB.Domain.Entities;
 using PhoneBookWEB.Models;
 
 namespace PhoneBookWEB.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataManager _dataManager;
+
+        public HomeController(DataManager dataManager)
         {
-            _logger = logger;
+            _dataManager = dataManager;
+            //if()
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            if (_dataManager == null)
+            {
+                return RedirectToAction("NoData", "NotFound");
+            }
+            else
+            {
+                List<PhoneBookRecord> records = null;
+                records = _dataManager.PhoneBookRecords.GetPhoneBookRecords().GetAwaiter().GetResult();
+                Role.RoleName = "Anonymus";
+                return View(records);
+            }
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
