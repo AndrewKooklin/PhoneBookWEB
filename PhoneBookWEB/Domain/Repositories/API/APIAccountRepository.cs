@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using PhoneBookWEB.Domain.Entities;
 using PhoneBookWEB.Domain.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PhoneBookWEB.Domain.Repositories.API
