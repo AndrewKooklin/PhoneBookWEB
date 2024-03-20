@@ -2,7 +2,6 @@ C:\repos\PhoneBookWEB\PhoneBookWEB\bin\Debug\netcoreapp3.1\appsettings.Developme
 C:\repos\PhoneBookWEB\PhoneBookWEB\bin\Debug\netcoreapp3.1\appsettings.json
 C:\repos\PhoneBookWEB\PhoneBookWEB\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\repos\PhoneBookWEB\PhoneBookWEB\bin\Debug\netcoreapp3.1\PhoneBookWEB.exe
-C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.csprojAssemblyReference.cache
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.AssemblyInfoInputs.cache
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.AssemblyInfo.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.RazorAssemblyInfo.cache

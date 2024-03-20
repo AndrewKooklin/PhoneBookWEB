@@ -21,11 +21,11 @@ namespace PhoneBookWEB.Domain.Repositories.API
         private string apiResponse;
         private string result;
         private bool apiResponseBoolean;
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
-        private RoleManager<IdentityRole> _roleManager;
+        //private UserManager<IdentityUser> _userManager;
+        //private SignInManager<IdentityUser> _signInManager;
+        //private RoleManager<IdentityRole> _roleManager;
 
-        //private UserWithRolesModel userWithRoles;
+        private List<string> userRoles;
 
         public APIAccountRepository()
         {
@@ -51,7 +51,7 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         public async Task<bool> CreateUser(RegisterModel model)
         {
-            urlRequest = $"{url}" + "APIRegister/CreateNewUser/" + $"{model}";
+            urlRequest = $"{url}" + "RegisterAPI/CreateNewUser/" + $"{model}";
             using (_httpClient = new HttpClient())
             {
                 using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
@@ -74,65 +74,69 @@ namespace PhoneBookWEB.Domain.Repositories.API
             throw new NotImplementedException();
         }
 
-        //public async Task<UserWithRolesModel> GetUserWithRoles(LoginModel model)
-        //{
-        //    urlRequest = $"{url}" + "Login/GetUserWithRoles/" + $"{model}";
-        //    using (response = await _httpClient.GetHttpClient().PostAsJsonAsync(urlRequest, model))
-        //    {
-        //        apiResponse = await response.Content.ReadAsStringAsync();
-        //        userWithRoles = JsonConvert.DeserializeObject<UserWithRolesModel>(apiResponse);
-        //    }
-        //    return userWithRoles;
-        //}
+        public async Task<List<string>> GetUserRoles(LoginModel model)
+        {
+            urlRequest = $"{url}" + "Login/GetUserRoles/" + $"{model}";
+            using(_httpClient = new HttpClient())
+            {
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    userRoles = JsonConvert.DeserializeObject<List<string>>(apiResponse);
+                }
+            }
+            
+            return userRoles;
+        }
 
         public void LogoutUser()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<UserManager<IdentityUser>> GetUserManager()
-        {
-            urlRequest = $"{url}" + "APIRegister/GetUserManager";
-            using (_httpClient = new HttpClient())
-            {
-                using (response = await _httpClient.GetAsync(urlRequest))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    _userManager = JsonConvert.DeserializeObject<UserManager<IdentityUser>>(apiResponse);
-                }
-            }
+        //public async Task<UserManager<IdentityUser>> GetUserManager()
+        //{
+        //    urlRequest = $"{url}" + "APIRegister/GetUserManager";
+        //    using (_httpClient = new HttpClient())
+        //    {
+        //        using (response = await _httpClient.GetAsync(urlRequest))
+        //        {
+        //            string apiResponse = await response.Content.ReadAsStringAsync();
+        //            _userManager = JsonConvert.DeserializeObject<UserManager<IdentityUser>>(apiResponse);
+        //        }
+        //    }
             
-            return _userManager;
-        }
+        //    return _userManager;
+        //}
 
-        public async Task<SignInManager<IdentityUser>> GetSignInManager()
-        {
-            urlRequest = $"{url}" + "APIRegister/GetSignInManager";
-            using (_httpClient = new HttpClient())
-            {
-                using (response = await _httpClient.GetAsync(urlRequest))
-                {
-                     string apiResponse = await response.Content.ReadAsStringAsync();
-                     _signInManager = JsonConvert.DeserializeObject<SignInManager<IdentityUser>>(apiResponse);
-                }
-            }
+        //public async Task<SignInManager<IdentityUser>> GetSignInManager()
+        //{
+        //    urlRequest = $"{url}" + "APIRegister/GetSignInManager";
+        //    using (_httpClient = new HttpClient())
+        //    {
+        //        using (response = await _httpClient.GetAsync(urlRequest))
+        //        {
+        //             string apiResponse = await response.Content.ReadAsStringAsync();
+        //             _signInManager = JsonConvert.DeserializeObject<SignInManager<IdentityUser>>(apiResponse);
+        //        }
+        //    }
             
-            return _signInManager;
-        }
+        //    return _signInManager;
+        //}
 
-        public async Task<RoleManager<IdentityRole>> GetRoleManager()
-        {
-            urlRequest = $"{url}" + "APIRegister/GetRoleManager";
-            using (_httpClient = new HttpClient())
-            {
-                using (response = await _httpClient.GetAsync(urlRequest))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    _roleManager = JsonConvert.DeserializeObject<RoleManager<IdentityRole>>(apiResponse);
-                }
-            }
+        //public async Task<RoleManager<IdentityRole>> GetRoleManager()
+        //{
+        //    urlRequest = $"{url}" + "APIRegister/GetRoleManager";
+        //    using (_httpClient = new HttpClient())
+        //    {
+        //        using (response = await _httpClient.GetAsync(urlRequest))
+        //        {
+        //            string apiResponse = await response.Content.ReadAsStringAsync();
+        //            _roleManager = JsonConvert.DeserializeObject<RoleManager<IdentityRole>>(apiResponse);
+        //        }
+        //    }
             
-            return _roleManager;
-        }
+        //    return _roleManager;
+        //}
     }
 }

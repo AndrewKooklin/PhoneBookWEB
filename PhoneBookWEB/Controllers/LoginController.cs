@@ -11,7 +11,7 @@ namespace PhoneBookWEB.Controllers
 {
     public class LoginController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
+        //private SignInManager<IdentityUser> _signInManager;
         private DataManager _dataManager;
 
         public LoginController(/*SignInManager<IdentityUser> signInManager,*/
@@ -20,7 +20,7 @@ namespace PhoneBookWEB.Controllers
             _dataManager = dataManager;
             //if (_dataManager.Role != null && !_dataManager.Role.Equals("Anonymus"))
             //{
-                _signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
+                //_signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
             //}
         }
 
@@ -41,11 +41,17 @@ namespace PhoneBookWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email,
-                    model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+
+                UserRoles.Roles = await _dataManager.Accounts.GetUserRoles(model);
+                if(UserRoles.Roles == null)
                 {
-                    //this._signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
+                    UserRoles.EMail = "";
+                    UserRoles.Roles = new List<string> { "Anonymus" };
+                    return RedirectToAction("Index", "Home");
+                }
+                else if(UserRoles.Roles != null)
+                {
+                    UserRoles.EMail = model.Email;
                     return RedirectToAction("Index", "Home");
                 }
                 else

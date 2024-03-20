@@ -1,11 +1,11 @@
 ﻿@model List<PhoneBookRecord>
-@inject SignInManager<IdentityUser> SignInManager
+@inject UserRoles UserRoles
 <h2>PhoneBook</h2>
 
-@if (SignInManager.IsSignedIn(User))
+@if (UserRoles.Roles.Contains("User") || UserRoles.Roles.Contains("Admin"))
 {
     <div>
-        <a class="btn btn-primary" asp-controller="CreateRecord" asp-action="Create" title="Создать запись">Создать</a>
+        <a class="btn btn-primary" asp-controller="CreateRecord" asp-action="CreateRecord" title="Создать запись">Создать</a>
     </div>
     <div>
         <p>&nbsp;</p>
@@ -36,7 +36,7 @@
                     <td>@item.LastName</td>
                     <td>@item.FirstName</td>
                     <td>@item.FathersName</td>
-                    @if (User.IsInRole("Admin"))
+                    @if (UserRoles.Roles.Contains("Admin"))
                     {
                         <td>
                             <a class="btn btn-dark" asp-controller="DeleteRecord"

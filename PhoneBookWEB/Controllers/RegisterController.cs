@@ -30,9 +30,9 @@ namespace PhoneBookWEB.Controllers
             }
             else
             {
-                _userManager = _dataManager.Accounts.GetUserManager().GetAwaiter().GetResult();
-                _signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
-                _roleManager = _dataManager.Accounts.GetRoleManager().GetAwaiter().GetResult();
+                //_userManager = _dataManager.Accounts.GetUserManager().GetAwaiter().GetResult();
+                //_signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
+                //_roleManager = _dataManager.Accounts.GetRoleManager().GetAwaiter().GetResult();
             }
 
         }

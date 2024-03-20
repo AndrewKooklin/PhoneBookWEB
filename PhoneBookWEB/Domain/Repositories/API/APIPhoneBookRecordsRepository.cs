@@ -19,12 +19,11 @@ namespace PhoneBookWEB.Domain.Repositories.API
         HttpResponseMessage response;
         string result;
         bool apiResponseConvert;
+        private PhoneBookRecord bookRecord;
 
         public APIPhoneBookRecordsRepository()
         {
             _httpClient = new HttpClient();
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<List<PhoneBookRecord>> GetPhoneBookRecords()
@@ -34,8 +33,10 @@ namespace PhoneBookWEB.Domain.Repositories.API
             List<PhoneBookRecord> records = new List<PhoneBookRecord>();
             HttpResponseMessage response = null;
 
-            using (_httpClient)
+            using (_httpClient = new HttpClient())
             {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 using (response = await _httpClient.GetAsync(urlRequest))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -58,34 +59,55 @@ namespace PhoneBookWEB.Domain.Repositories.API
         {
             urlRequest = $"{url}" + "Details/GetRecordById/" + $"{id}";
 
-            string json = _httpClient.GetStringAsync(urlRequest).Result;
+            using(_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string json = _httpClient.GetStringAsync(urlRequest).Result;
+                bookRecord = JsonConvert.DeserializeObject<PhoneBookRecord>(json);
+            }
 
-            return JsonConvert.DeserializeObject<PhoneBookRecord>(json);
+            return bookRecord;
         }
 
         public async Task<bool> SavePhoneBookRecord(PhoneBookRecord phoneBookRecord)
         {
-            urlRequest = $"{url}" + "CreateRecord/CreateRecord/" + $"{phoneBookRecord}";
-            using (response = await _httpClient.PostAsJsonAsync(urlRequest, phoneBookRecord))
+            urlRequest = $"{url}" + "CreateRecordAPI/CreateRecord/" + $"{phoneBookRecord}";
+            using(_httpClient = new HttpClient())
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                apiResponseConvert = JsonConvert.DeserializeObject<bool>(apiResponse);
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, phoneBookRecord))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseConvert = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
             }
+            
             return apiResponseConvert;
         }
 
         public async void DeletePhoneBookRecord(int id)
         {
             urlRequest = $"{url}" + "DeleteRecord/DeleteRecord/" + $"{id}";
-
-            response = await _httpClient.DeleteAsync(urlRequest);
+            using(_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                response = await _httpClient.DeleteAsync(urlRequest);
+            }
         }
 
         public async void EditPhoneBookRecord(PhoneBookRecord phoneBookRecord)
         {
             urlRequest = $"{url}" + "EditRecord/EditRecord/";
 
-            response = await _httpClient.PostAsJsonAsync(urlRequest, phoneBookRecord);
+            using(_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                response = await _httpClient.PostAsJsonAsync(urlRequest, phoneBookRecord);
+            }
         }
     }
 }
