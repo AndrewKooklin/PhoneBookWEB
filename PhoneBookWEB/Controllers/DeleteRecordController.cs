@@ -20,7 +20,7 @@ namespace PhoneBookWEB.Controllers
         [HttpPatch]
         [HttpPost]
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteRecord(int id)
         {
             _dataManager.PhoneBookRecords.DeletePhoneBookRecord(id);
 

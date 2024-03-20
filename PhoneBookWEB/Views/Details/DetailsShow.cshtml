@@ -30,7 +30,7 @@
     <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Home</a>
     @if (UserRoles.Roles.Contains("Admin"))
     {
-        <a class="btn btn-primary" asp-controller="EditRecord" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
-        <a class="btn btn-primary" asp-controller="DeleteRecord" asp-action="Delete" asp-route-id="@Model.Id">Удалить</a>
+        <a class="btn btn-primary" asp-controller="EditRecord" asp-action="EditRecord" asp-route-id="@Model.Id">Редактировать</a>
+        <a class="btn btn-primary" asp-controller="DeleteRecord" asp-action="DeleteRecord" asp-route-id="@Model.Id">Удалить</a>
     }
 </div>

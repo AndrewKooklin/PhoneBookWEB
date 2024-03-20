@@ -165,3 +165,4 @@ C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Register\
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Roles\CreateRole.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Roles\GetRoleList.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Users\UsersList.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.csprojAssemblyReference.cache

@@ -18,7 +18,7 @@ namespace PhoneBookWEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult EditRecord(int id)
         {
             PhoneBookRecord phoneBookRecord = _dataManager.PhoneBookRecords.GetPhoneBookRecordById(id);
             return View(phoneBookRecord);
@@ -27,7 +27,7 @@ namespace PhoneBookWEB.Controllers
         [HttpPut]
         [HttpPost]
         [HttpDelete]
-        public IActionResult Edit(PhoneBookRecord model)
+        public IActionResult Editrecord(PhoneBookRecord model)
         {
             if (ModelState.IsValid)
             {
