@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace PhoneBookWEB.Domain.Repositories.API
 {
     public class APIAccountRepository : IAccountRepository
     {
-        private MyHttpClient _httpClient = new MyHttpClient();
+        private HttpClient _httpClient;
         private string url = @"https://localhost:44379/api/";
         private string urlRequest = "";
         private HttpResponseMessage response;
@@ -28,27 +29,38 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         public APIAccountRepository()
         {
+            //_httpClient = new HttpClient();
+            //_httpClient.DefaultRequestHeaders.Accept.Clear();
+            //_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<bool> CheckUserToDB(LoginModel model)
         {
             urlRequest = $"{url}" + "Login/CheckUserToDB/" + $"{model}";
-            using (response = await _httpClient.GetHttpClient().PostAsJsonAsync(urlRequest, model))
+            using(_httpClient = new HttpClient())
             {
-                apiResponse = await response.Content.ReadAsStringAsync();
-                apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
             }
+            
             return apiResponseBoolean;
         }
 
         public async Task<bool> CreateUser(RegisterModel model)
         {
             urlRequest = $"{url}" + "APIRegister/CreateNewUser/" + $"{model}";
-            using (response = await _httpClient.GetHttpClient().PostAsJsonAsync(urlRequest, model))
+            using (_httpClient = new HttpClient())
             {
-                apiResponse = await response.Content.ReadAsStringAsync();
-                apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
             }
+            
             return apiResponseBoolean;
         }
 
@@ -80,34 +92,46 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         public async Task<UserManager<IdentityUser>> GetUserManager()
         {
-            urlRequest = $"{url}" + "Register/GetUserManager";
-            using (response = await _httpClient.GetHttpClient().GetAsync(urlRequest))
+            urlRequest = $"{url}" + "APIRegister/GetUserManager";
+            using (_httpClient = new HttpClient())
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                _userManager = JsonConvert.DeserializeObject<UserManager<IdentityUser>>(apiResponse);
+                using (response = await _httpClient.GetAsync(urlRequest))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    _userManager = JsonConvert.DeserializeObject<UserManager<IdentityUser>>(apiResponse);
+                }
             }
+            
             return _userManager;
         }
 
         public async Task<SignInManager<IdentityUser>> GetSignInManager()
         {
-            urlRequest = $"{url}" + "Register/GetSignInManager";
-            using (response = await _httpClient.GetHttpClient().GetAsync(urlRequest))
+            urlRequest = $"{url}" + "APIRegister/GetSignInManager";
+            using (_httpClient = new HttpClient())
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                _signInManager = JsonConvert.DeserializeObject<SignInManager<IdentityUser>>(apiResponse);
+                using (response = await _httpClient.GetAsync(urlRequest))
+                {
+                     string apiResponse = await response.Content.ReadAsStringAsync();
+                     _signInManager = JsonConvert.DeserializeObject<SignInManager<IdentityUser>>(apiResponse);
+                }
             }
+            
             return _signInManager;
         }
 
         public async Task<RoleManager<IdentityRole>> GetRoleManager()
         {
-            urlRequest = $"{url}" + "Register/GetRoleManager";
-            using (response = await _httpClient.GetHttpClient().GetAsync(urlRequest))
+            urlRequest = $"{url}" + "APIRegister/GetRoleManager";
+            using (_httpClient = new HttpClient())
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                _roleManager = JsonConvert.DeserializeObject<RoleManager<IdentityRole>>(apiResponse);
+                using (response = await _httpClient.GetAsync(urlRequest))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    _roleManager = JsonConvert.DeserializeObject<RoleManager<IdentityRole>>(apiResponse);
+                }
             }
+            
             return _roleManager;
         }
     }

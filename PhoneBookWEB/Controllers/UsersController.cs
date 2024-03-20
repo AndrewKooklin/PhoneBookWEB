@@ -16,7 +16,7 @@ namespace PhoneBookWEB.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult UsersList()
         {
             var users = _userManager.Users;
             return View(users);

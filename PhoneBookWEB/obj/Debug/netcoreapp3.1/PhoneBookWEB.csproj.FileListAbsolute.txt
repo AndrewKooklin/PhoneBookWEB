@@ -12,7 +12,6 @@ C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.TagHelpe
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.RazorCoreGenerate.cache
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -156,3 +155,14 @@ C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.Views.pd
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.dll
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.pdb
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\PhoneBookWEB.genruntimeconfig.cache
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\CreateRecord\CreateRecord.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Details\DetailsShow.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\EditRecord\EditRecord.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\LogInError.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\LogInIndex.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Logout\LogoutUser.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\NotFound\NoData.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Register\CreateUser.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Roles\CreateRole.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Roles\GetRoleList.cshtml.g.cs
+C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Users\UsersList.cshtml.g.cs

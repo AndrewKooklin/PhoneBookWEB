@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBookWEB.Domain;
+using PhoneBookWEB.Domain.Entities;
 
 namespace PhoneBookWEB.Controllers
 {
@@ -17,10 +18,10 @@ namespace PhoneBookWEB.Controllers
                                 DataManager dataManager)
         {
             _dataManager = dataManager;
-            if (!_dataManager.Role.Equals("Anonymus"))
-            {
+            //if (_dataManager.Role != null && !_dataManager.Role.Equals("Anonymus"))
+            //{
                 _signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
-            }
+            //}
         }
 
         public IActionResult LogInIndex()

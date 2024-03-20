@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBookWEB.Domain
 {
-    public class MyHttpClient : IDisposable
+    public class MyHttpClient
     {
         public HttpClient GetHttpClient()
         {
@@ -15,11 +15,6 @@ namespace PhoneBookWEB.Domain
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return client;
-        }
-
-        public void Dispose()
-        {
-            this.Dispose();
         }
     }
 }

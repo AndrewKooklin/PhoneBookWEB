@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PhoneBookWEB.Domain;
 using PhoneBookWEB.Domain.Entities;
-using PhoneBookWEB.Models;
 
 namespace PhoneBookWEB.Controllers
 {
@@ -33,7 +32,7 @@ namespace PhoneBookWEB.Controllers
             {
                 List<PhoneBookRecord> records = null;
                 records = _dataManager.PhoneBookRecords.GetPhoneBookRecords().GetAwaiter().GetResult();
-                Role.RoleName = "Anonymus";
+                UserRoles userRoles = new UserRoles();
                 return View(records);
             }
         }
