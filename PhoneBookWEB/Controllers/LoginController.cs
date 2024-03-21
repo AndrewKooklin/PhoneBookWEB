@@ -18,10 +18,7 @@ namespace PhoneBookWEB.Controllers
                                 DataManager dataManager)
         {
             _dataManager = dataManager;
-            //if (_dataManager.Role != null && !_dataManager.Role.Equals("Anonymus"))
-            //{
-                //_signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
-            //}
+
         }
 
         public IActionResult LogInIndex()
@@ -41,9 +38,8 @@ namespace PhoneBookWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 UserRoles.Roles = await _dataManager.Accounts.GetUserRoles(model);
-                if(UserRoles.Roles == null)
+                if (UserRoles.Roles == null)
                 {
                     UserRoles.EMail = "";
                     UserRoles.Roles = new List<string> { "Anonymus" };
@@ -52,6 +48,7 @@ namespace PhoneBookWEB.Controllers
                 else if(UserRoles.Roles != null)
                 {
                     UserRoles.EMail = model.Email;
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

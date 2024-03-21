@@ -27,6 +27,9 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         private List<string> userRoles;
         private List<string> roleNames;
+        private IEnumerable<IdentityRole> roles;
+        private List<IdentityUser> users;
+        private UserWithRolesModel userWithRoles;
 
         public APIAccountRepository()
         {
@@ -89,6 +92,20 @@ namespace PhoneBookWEB.Domain.Repositories.API
             throw new NotImplementedException();
         }
 
+        public IEnumerable<IdentityRole> GetRoles()
+        {
+            urlRequest = $"{url}" + "RolesAPI/GetRoles";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string result = _httpClient.GetStringAsync(urlRequest).Result;
+                roles = JsonConvert.DeserializeObject<IEnumerable<IdentityRole>>(result);
+            }
+
+            return roles;
+        }
+
         public async Task<List<string>> GetUserRoles(LoginModel model)
         {
             urlRequest = $"{url}" + "Login/GetUserRoles/" + $"{model}";
@@ -104,6 +121,68 @@ namespace PhoneBookWEB.Domain.Repositories.API
             }
             
             return userRoles;
+        }
+
+        public async Task<bool> CreateRole(IdentityRole role)
+        {
+            urlRequest = $"{url}" + "RolesAPI/CreateRole/" + $"{role}";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, role))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+
+            return apiResponseBoolean;
+        }
+
+        public async Task<bool> DeleteRole(string id)
+        {
+            urlRequest = $"{url}" + "RolesAPI/DeleteRole/" + $"{id}";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, id))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+
+            return apiResponseBoolean;
+        }
+
+        public List<IdentityUser> GetUsers()
+        {
+            urlRequest = $"{url}" + "UsersAPI/GetUsers";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string result = _httpClient.GetStringAsync(urlRequest).Result;
+                users = JsonConvert.DeserializeObject<List<IdentityUser>>(result);
+            }
+
+            return users;
+        }
+
+        public UserWithRolesModel GetUserWithRoles(string id)
+        {
+            urlRequest = $"{url}" + "UsersAPI/GetUserWithRoles/" + $"{id}";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string result = _httpClient.GetStringAsync(urlRequest).Result;
+                userWithRoles = JsonConvert.DeserializeObject<UserWithRolesModel>(result);
+            }
+
+            return userWithRoles;
         }
 
         public async void LogoutUser()

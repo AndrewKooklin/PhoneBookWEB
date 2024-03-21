@@ -1,6 +1,10 @@
 ﻿@model List<PhoneBookRecord>
 @inject UserRoles UserRoles
-<h2>PhoneBook</h2>
+@{
+    ViewData["Title"] = "Список контактов";
+}
+
+<h1>@ViewData["Title"]</h1>
 
 @if (UserRoles.Roles.Contains("User") || UserRoles.Roles.Contains("Admin"))
 {
@@ -18,6 +22,11 @@
             <th>LastName</th>
             <th>FirstName</th>
             <th>FathresName</th>
+            @if (UserRoles.Roles.Contains("Admin"))
+            {
+                <th class="text-center"><i>Edit</i></th>
+                <th class="text-center"><i>Delete</i></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -25,33 +34,33 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                <a asp-controller="Details"
-                   asp-action="DetailsShow"
-                   asp-route-id="@item.Id"
-                   title="Просмотреть"
-                   class="linkDetails">@item.Id</a>
-            </td>
-            <td>@item.LastName</td>
-            <td>@item.FirstName</td>
-            <td>@item.FathersName</td>
-            @if (UserRoles.Roles.Contains("Admin"))
-            {
-                <td>
-                    <a class="btn btn-dark" asp-controller="EditRecord"
-                       asp-action="EditRecord"
-                       asp-route-id="@item.Id"
-                       title="Редактировать">Редактировать</a>
-                </td>
-                <td>
-                    <a class="btn btn-dark" asp-controller="DeleteRecord"
-                       asp-action="DeleteRecord"
-                       asp-route-id="@item.Id"
-                       title="Удалить">Удалить</a>
-                </td>
-            }
-        </tr>
+                <tr>
+                    <td>
+                        <a asp-controller="Details"
+                           asp-action="DetailsShow"
+                           asp-route-id="@item.Id"
+                           title="Просмотреть"
+                           class="linkDetails">@item.Id</a>
+                    </td>
+                    <td>@item.LastName</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.FathersName</td>
+                    @if (UserRoles.Roles.Contains("Admin"))
+                    {
+                        <td width="150px">
+                            <a class="btn btn-dark" asp-controller="EditRecord"
+                               asp-action="EditRecord"
+                               asp-route-id="@item.Id"
+                               title="Редактировать">Редактировать</a>
+                        </td>
+                        <td width="150px">
+                            <a class="btn btn-dark" asp-controller="DeleteRecord"
+                               asp-action="DeleteRecord"
+                               asp-route-id="@item.Id"
+                               title="Удалить">Удалить</a>
+                        </td>
+                    }
+                </tr>
             }
         }
 

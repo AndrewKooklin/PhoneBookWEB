@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<IdentityRole>
+﻿@model IEnumerable<IdentityRole>
 
 @{
     ViewData["Title"] = "Список ролей";
@@ -23,12 +22,9 @@
                 <td>@Html.DisplayFor(modelitem => item.Id)</td>
                 <td>@Html.DisplayFor(modelitem => item.Name)</td>
                 <td>@Html.DisplayFor(modelitem => item.NormalizedName)</td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        <a asp-controller="Roles" asp-action="DeleteRole" asp-route-id="@item.Id" class="btn btn-primary" title="Удалить роль">Удалить</a>
-                    </td>
-                }
+                <td>
+                    <a asp-controller="Roles" asp-action="DeleteRole" asp-route-id="@item.Id" class="btn btn-primary" title="Удалить роль">Удалить</a>
+                </td>
             </tr>
         }
     </tbody>

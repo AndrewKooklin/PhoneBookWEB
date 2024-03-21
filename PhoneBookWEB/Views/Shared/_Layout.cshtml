@@ -31,10 +31,10 @@
                             @if (UserRoles.Roles.Contains("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="GetRoleList">Roles</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="GetUsersList">Users</a>
                                 </li>
                             }
                         }

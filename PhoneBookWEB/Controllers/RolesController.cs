@@ -4,21 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBookWEB.Domain;
 
 namespace PhoneBookWEB.Controllers
 {
     public class RolesController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly DataManager _dataManager;
 
-        public RolesController(RoleManager<IdentityRole> roleManager)
+        public RolesController(DataManager dataManager)
         {
-            _roleManager = roleManager;
+            _dataManager = dataManager;
         }
 
         public IActionResult GetRoleList()
         {
-            var roles = _roleManager.Roles;
+            var roles = _dataManager.Accounts.GetRoles();
             return View(roles);
         }
 
@@ -31,20 +32,31 @@ namespace PhoneBookWEB.Controllers
         [HttpPost]
         public IActionResult CreateRole(IdentityRole role)
         {
-            if (!_roleManager.RoleExistsAsync(role.Name).GetAwaiter().GetResult())
+            var result = _dataManager.Accounts.CreateRole(role).GetAwaiter().GetResult();
+            if (result)
             {
-                _roleManager.CreateAsync(new IdentityRole(role.Name)).GetAwaiter().GetResult();
+                return RedirectToAction("GetRoleList", "Roles" );
             }
-            return RedirectToAction("Index");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid add role.");
+                return View();
+            }
         }
 
         [HttpGet]
         public IActionResult DeleteRole(string id)
         {
-            IdentityRole role = _roleManager.FindByIdAsync(id).GetAwaiter().GetResult();
-            _roleManager.DeleteAsync(role).GetAwaiter().GetResult();
-
-            return RedirectToAction("Index");
+            var result = _dataManager.Accounts.DeleteRole(id).GetAwaiter().GetResult();
+            if (result)
+            {
+                return RedirectToAction("GetRoleList", "Roles");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid delete role.");
+                return RedirectToAction("GetRoleList", "Roles");
+            }
         }
     }
 }

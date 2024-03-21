@@ -14,18 +14,18 @@ namespace PhoneBookWEB.Controllers
     {
         private readonly DataManager _dataManager;
         IEnumerable<string> roleNames;
+        RegisterModel _registerModel = new RegisterModel();
 
         public RegisterController(DataManager dataManager)
         {
             _dataManager = dataManager;
+            roleNames = _dataManager.Accounts.GetRoleNames().AsEnumerable();
         }
-
-        RegisterModel _registerModel = new RegisterModel();
 
         [HttpGet]
         public IActionResult CreateUser()
         {
-            roleNames = _dataManager.Accounts.GetRoleNames().AsEnumerable();
+            
             _registerModel = new RegisterModel
             {
                 RolesList = roleNames.Select(i => new SelectListItem
@@ -50,12 +50,28 @@ namespace PhoneBookWEB.Controllers
                 }
                 else
                 {
+                    _registerModel = new RegisterModel
+                    {
+                        RolesList = roleNames.Select(i => new SelectListItem
+                        {
+                            Text = i,
+                            Value = i
+                        })
+                    };
                     return View(_registerModel);
                 }
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                _registerModel = new RegisterModel 
+                { 
+                    RolesList = roleNames.Select(i => new SelectListItem 
+                    { 
+                        Text = i,
+                        Value = i 
+                    }) 
+                };
                 return View(_registerModel);
             }
         }

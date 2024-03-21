@@ -1,0 +1,32 @@
+﻿@model UserWithRolesModel
+@{
+    ViewData["Title"] = "Пользователь";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.User.Id</td>
+            <td>@Model.User.Email</td>
+            <td>
+                @foreach (var role in Model.Roles)
+                {
+                    <label>@role.Name </label>
+                }
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <div>
+        <a class="btn btn-primary" asp-controller="Users" asp-action="GetUsersList">Users</a>
+        <a class="btn btn-primary" asp-controller="EditRecord" asp-action="EditRecord" asp-route-id="@Model.User.Id">Редактировать</a>
+        <a class="btn btn-primary" asp-controller="DeleteRecord" asp-action="DeleteRecord" asp-route-id="@Model.User.Id">Удалить</a>
+    </div>

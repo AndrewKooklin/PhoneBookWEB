@@ -4,22 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBookWEB.Domain;
 
 namespace PhoneBookWEB.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly DataManager _dataManager;
 
-        public UsersController(UserManager<IdentityUser> userManager)
+        public UsersController(DataManager dataManager)
         {
-            _userManager = userManager;
+            _dataManager = dataManager;
         }
 
-        public IActionResult UsersList()
+        [HttpGet]
+        public IActionResult GetUsersList()
         {
-            var users = _userManager.Users;
+            var users = _dataManager.Accounts.GetUsers();
             return View(users);
+        }
+
+        [HttpGet]
+        public IActionResult UserDetails(string id)
+        {
+            var user = _dataManager.Accounts.GetUserWithRoles(id);
+            return View(user);
         }
 
         [HttpGet]
@@ -32,8 +41,8 @@ namespace PhoneBookWEB.Controllers
         [HttpGet]
         public IActionResult DeleteUser(string id)
         {
-            IdentityUser user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
-            _userManager.DeleteAsync(user).GetAwaiter().GetResult();
+            //IdentityUser user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
+            //_userManager.DeleteAsync(user).GetAwaiter().GetResult();
 
             return RedirectToAction("Index");
         }
