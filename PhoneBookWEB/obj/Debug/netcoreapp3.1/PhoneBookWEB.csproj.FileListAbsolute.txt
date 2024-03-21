@@ -159,7 +159,6 @@ C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Details\D
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\EditRecord\EditRecord.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\LogInError.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\LogInIndex.cshtml.g.cs
-C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Logout\LogoutUser.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\NotFound\NoData.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Register\CreateUser.cshtml.g.cs
 C:\repos\PhoneBookWEB\PhoneBookWEB\obj\Debug\netcoreapp3.1\Razor\Views\Roles\CreateRole.cshtml.g.cs

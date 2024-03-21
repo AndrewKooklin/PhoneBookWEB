@@ -30,7 +30,7 @@
                 {*@
             <div class="form-group">
                 <label asp-for="Role"></label>
-                <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select" aria-required="true">
+                <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select text-dark" aria-required="true">
                     <option disabled selected>Выберите роль</option>
                 </select>
                 <span asp-validation-for="Role" class="text-danger"></span>

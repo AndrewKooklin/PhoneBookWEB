@@ -12,40 +12,23 @@ namespace PhoneBookWEB.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DataManager _dataManager;
+        IEnumerable<string> roleNames;
 
-        public RegisterController(
-            //UserManager<IdentityUser> userManager,
-            //SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager,
-            DataManager dataManager)
+        public RegisterController(DataManager dataManager)
         {
             _dataManager = dataManager;
-            if (Role.RoleName.Equals("Anonymus"))
-            {
-                _roleManager = roleManager;
-            }
-            else
-            {
-                //_userManager = _dataManager.Accounts.GetUserManager().GetAwaiter().GetResult();
-                //_signInManager = _dataManager.Accounts.GetSignInManager().GetAwaiter().GetResult();
-                //_roleManager = _dataManager.Accounts.GetRoleManager().GetAwaiter().GetResult();
-            }
-
         }
 
         RegisterModel _registerModel = new RegisterModel();
-        public string ReturnUrl { get; set; }
 
         [HttpGet]
         public IActionResult CreateUser()
         {
+            roleNames = _dataManager.Accounts.GetRoleNames().AsEnumerable();
             _registerModel = new RegisterModel
             {
-                RolesList = _roleManager.Roles.Select(r => r.Name).Select(i => new SelectListItem
+                RolesList = roleNames.Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
@@ -63,18 +46,17 @@ namespace PhoneBookWEB.Controllers
                 var result = await _dataManager.Accounts.CreateUser(model);
                 if (result)
                 {
-                    Role.RoleName = "";
                     return RedirectToAction("LogInIndex", "Login");
                 }
                 else
                 {
-                    return View(model);
+                    return View(_registerModel);
                 }
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
+                return View(_registerModel);
             }
         }
     }

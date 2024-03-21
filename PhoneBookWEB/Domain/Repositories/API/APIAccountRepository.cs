@@ -26,6 +26,7 @@ namespace PhoneBookWEB.Domain.Repositories.API
         //private RoleManager<IdentityRole> _roleManager;
 
         private List<string> userRoles;
+        private List<string> roleNames;
 
         public APIAccountRepository()
         {
@@ -39,6 +40,8 @@ namespace PhoneBookWEB.Domain.Repositories.API
             urlRequest = $"{url}" + "Login/CheckUserToDB/" + $"{model}";
             using(_httpClient = new HttpClient())
             {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
                 {
                     apiResponse = await response.Content.ReadAsStringAsync();
@@ -54,6 +57,8 @@ namespace PhoneBookWEB.Domain.Repositories.API
             urlRequest = $"{url}" + "RegisterAPI/CreateNewUser/" + $"{model}";
             using (_httpClient = new HttpClient())
             {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
                 {
                     apiResponse = await response.Content.ReadAsStringAsync();
@@ -64,9 +69,19 @@ namespace PhoneBookWEB.Domain.Repositories.API
             return apiResponseBoolean;
         }
 
-        public Task<List<string>> GetRoles(IdentityUser user)
+        public List<string> GetRoleNames()
         {
-            throw new NotImplementedException();
+            roleNames = new List<string>();
+            urlRequest = $"{url}" + "RegisterAPI/GetRoleNames";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string result = _httpClient.GetStringAsync(urlRequest).Result;
+                roleNames = JsonConvert.DeserializeObject<List<string>>(result);
+            }
+
+            return roleNames;
         }
 
         public Task<IdentityUser> GetUser(LoginModel model)
@@ -79,6 +94,8 @@ namespace PhoneBookWEB.Domain.Repositories.API
             urlRequest = $"{url}" + "Login/GetUserRoles/" + $"{model}";
             using(_httpClient = new HttpClient())
             {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
                 {
                     apiResponse = await response.Content.ReadAsStringAsync();
@@ -89,9 +106,15 @@ namespace PhoneBookWEB.Domain.Repositories.API
             return userRoles;
         }
 
-        public void LogoutUser()
+        public async void LogoutUser()
         {
-            throw new NotImplementedException();
+            urlRequest = $"{url}" + "LogoutAPI/LogoutUser";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                await _httpClient.GetAsync(urlRequest);
+            }
         }
 
         //public async Task<UserManager<IdentityUser>> GetUserManager()

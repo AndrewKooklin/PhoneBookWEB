@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Logout\**" />
+    <Content Remove="Views\Logout\**" />
+    <EmbeddedResource Remove="Views\Logout\**" />
+    <None Remove="Views\Logout\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Entities\LogoutModel.cs" />
+    <Compile Remove="Domain\Entities\Role.cs" />
     <Compile Remove="Models\ErrorViewModel.cs" />
   </ItemGroup>
 

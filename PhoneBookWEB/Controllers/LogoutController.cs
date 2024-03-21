@@ -4,23 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBookWEB.Domain;
+using PhoneBookWEB.Domain.Entities;
 
 namespace PhoneBookWEB.Controllers
 {
     public class LogoutController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly DataManager _dataManager;
 
-        public LogoutController(SignInManager<IdentityUser> signInManager)
+        public LogoutController(DataManager dataManager)
         {
-            _signInManager = signInManager;
+            _dataManager = dataManager;
         }
 
-        //[HttpPost]
-        //[Route("")]
-        public async Task<IActionResult> LogoutUser()
+        public IActionResult LogoutUser()
         {
-            await _signInManager.SignOutAsync();
+            _dataManager.Accounts.LogoutUser();
+            UserRoles.EMail = "";
+            UserRoles.Roles = new List<string> { "Anonymus" };
             return RedirectToAction("Index", "Home");
         }
     }
