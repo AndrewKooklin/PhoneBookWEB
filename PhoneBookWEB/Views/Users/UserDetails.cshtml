@@ -19,14 +19,26 @@
             <td>
                 @foreach (var role in Model.Roles)
                 {
-                    <label>@role.Name </label>
+                    <label>@role </label>
                 }
             </td>
         </tr>
     </tbody>
-    </table>
-    <div>
-        <a class="btn btn-primary" asp-controller="Users" asp-action="GetUsersList">Users</a>
-        <a class="btn btn-primary" asp-controller="EditRecord" asp-action="EditRecord" asp-route-id="@Model.User.Id">Редактировать</a>
-        <a class="btn btn-primary" asp-controller="DeleteRecord" asp-action="DeleteRecord" asp-route-id="@Model.User.Id">Удалить</a>
-    </div>
+</table>
+<div class="form-group">
+    <label asp-for="Role"></label>
+    <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select text-dark" aria-required="true" style="width:auto">
+        <option disabled selected>Выберите роль</option>
+    </select>
+    <span asp-validation-for="Role" class="text-danger"></span>
+</div>
+<div>
+    <a class="btn btn-primary" asp-controller="Users" 
+                               asp-action="AddRoleToUser" 
+                               asp-route-userId="@Model.User.Id"
+                               asp-route-role="@Model.Role">Добавить</a>
+    <a class="btn btn-primary" asp-controller="Users" 
+                               asp-action="DeleteRoleUser" 
+                               asp-route-userIdd="@Model.User.Id"
+                               asp-route-role="@Model.Role">Удалить</a>
+</div>

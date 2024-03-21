@@ -10,7 +10,6 @@ namespace AspNetCore
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 2 "C:\repos\PhoneBookWEB\PhoneBookWEB\Views\_ViewImports.cshtml"
@@ -33,8 +32,15 @@ using PhoneBookWEB.Domain.Entities;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\repos\PhoneBookWEB\PhoneBookWEB\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fc4355b554ac533533ccb5eff8c5e0e52b14fddd", @"/Views/Login/LogInError.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ba5930b90334449ee7b9c462b5b44fb5f7ce8131", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5eacf484dfdeaf4033d31c83dcdbe37a3c3d37fa", @"/Views/_ViewImports.cshtml")]
     public class Views_Login_LogInError : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
