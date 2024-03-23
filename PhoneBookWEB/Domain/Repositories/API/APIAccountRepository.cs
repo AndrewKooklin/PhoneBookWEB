@@ -185,6 +185,23 @@ namespace PhoneBookWEB.Domain.Repositories.API
             return userWithRoles;
         }
 
+        public async Task<bool> AddRoleToUser(RoleUserModel model)
+        {
+            urlRequest = $"{url}" + "UsersAPI/AddRoleToUser/" + $"{model}/";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, model))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+
+            return apiResponseBoolean;
+        }
+
         public async void LogoutUser()
         {
             urlRequest = $"{url}" + "LogoutAPI/LogoutUser";

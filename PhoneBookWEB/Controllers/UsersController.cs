@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PhoneBookWEB.Domain;
+using PhoneBookWEB.Domain.Entities;
 
 namespace PhoneBookWEB.Controllers
 {
@@ -58,9 +59,23 @@ namespace PhoneBookWEB.Controllers
         [HttpGet]
         public IActionResult AddRoleToUser(string userId, string role)
         {
+            RoleUserModel model = new RoleUserModel
+            {
+                UserId = userId,
+                Role = role
+            };
             
-
-            return RedirectToAction("Index");
+            bool result = _dataManager.Accounts.AddRoleToUser(model);
+            if (result)
+            {
+                ModelState.AddModelError(string.Empty, "Role added.");
+                return RedirectToAction("UserDetails", "Users");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "The User  already has a role.");
+                return RedirectToAction("UserDetails", "Users");
+            }
         }
 
         [HttpGet]
