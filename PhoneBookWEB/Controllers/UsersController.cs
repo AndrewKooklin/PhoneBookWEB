@@ -173,7 +173,7 @@ namespace PhoneBookWEB.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult DeleteUser(string id)
         {
             bool resultRoles = _dataManager.Accounts.DeleteRolesUser(id).GetAwaiter().GetResult();

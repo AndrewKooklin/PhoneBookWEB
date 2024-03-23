@@ -25,7 +25,20 @@ namespace PhoneBookWEB.Controllers
         [HttpGet]
         public IActionResult CreateUser()
         {
-            
+            _registerModel = new RegisterModel
+            {
+                RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
+            return View(_registerModel);
+        }
+
+        [HttpGet]
+        public IActionResult CreateNewUser()
+        {
             _registerModel = new RegisterModel
             {
                 RolesList = roleNames.Select(i => new SelectListItem
@@ -58,6 +71,7 @@ namespace PhoneBookWEB.Controllers
                             Value = i
                         })
                     };
+                    ModelState.AddModelError(string.Empty, "User already exist.");
                     return View(_registerModel);
                 }
             }
@@ -71,6 +85,46 @@ namespace PhoneBookWEB.Controllers
                         Text = i,
                         Value = i 
                     }) 
+                };
+                return View(_registerModel);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUser(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var result = await _dataManager.Accounts.CreateUser(model);
+                if (result)
+                {
+                    return RedirectToAction("GetUsersList", "Users");
+                }
+                else
+                {
+                    _registerModel = new RegisterModel
+                    {
+                        RolesList = roleNames.Select(i => new SelectListItem
+                        {
+                            Text = i,
+                            Value = i
+                        })
+                    };
+                    ModelState.AddModelError(string.Empty, "User already exist.");
+                    return View(_registerModel);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid register model.");
+                _registerModel = new RegisterModel
+                {
+                    RolesList = roleNames.Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    })
                 };
                 return View(_registerModel);
             }
