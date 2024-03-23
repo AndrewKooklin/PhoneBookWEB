@@ -31,7 +31,9 @@ namespace PhoneBookWEB.Domain.Repositories.Abstract
 
         UserWithRolesModel GetUserWithRoles(string id);
 
-        bool AddRoleToUser(RoleUserModel model);
+        Task<bool> AddRoleToUser(RoleUserModel model);
+
+        Task<bool> DeleteRoleUser(RoleUserModel model);
 
         //Task<UserManager<IdentityUser>> GetUserManager();
 

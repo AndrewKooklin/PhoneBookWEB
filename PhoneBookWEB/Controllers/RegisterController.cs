@@ -63,7 +63,7 @@ namespace PhoneBookWEB.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Invalid register model.");
                 _registerModel = new RegisterModel 
                 { 
                     RolesList = roleNames.Select(i => new SelectListItem 

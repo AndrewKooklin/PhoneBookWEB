@@ -14,10 +14,14 @@ namespace PhoneBookWEB.Domain.Entities
 
         public List<string> Roles { get; set; }
 
-        [Required(ErrorMessage = "Выберите поле \"Роль\"")]
+        //[Required(ErrorMessage = "Выберите \"Роль\"")]
         [Display(Name = "Роль")]
         public string Role { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
+
+        public string Add { get; set; }
+
+        public string Delete { get; set; }
     }
 }

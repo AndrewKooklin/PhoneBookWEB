@@ -24,8 +24,8 @@
             <th>FathresName</th>
             @if (UserRoles.Roles.Contains("Admin"))
             {
-                <th class="text-center"><i>Edit</i></th>
-                <th class="text-center"><i>Delete</i></th>
+                <th class="text-center" width="150px"><i>Edit</i></th>
+                <th class="text-center" width="100px"><i>Delete</i></th>
             }
         </tr>
     </thead>
@@ -53,7 +53,7 @@
                                asp-route-id="@item.Id"
                                title="Редактировать">Редактировать</a>
                         </td>
-                        <td width="150px">
+                        <td width="100px">
                             <a class="btn btn-dark" asp-controller="DeleteRecord"
                                asp-action="DeleteRecord"
                                asp-route-id="@item.Id"

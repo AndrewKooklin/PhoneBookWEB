@@ -41,7 +41,7 @@ namespace PhoneBookWEB.Controllers
                 UserRoles.Roles = await _dataManager.Accounts.GetUserRoles(model);
                 if (UserRoles.Roles == null)
                 {
-                    UserRoles.EMail = "";
+                    UserRoles.EMail = model.Email;
                     UserRoles.Roles = new List<string> { "Anonymus" };
                     return RedirectToAction("Index", "Home");
                 }

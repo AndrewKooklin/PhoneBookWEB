@@ -19,26 +19,48 @@
             <td>
                 @foreach (var role in Model.Roles)
                 {
-                    <label>@role </label>
+                    <label>@role </label><br />
                 }
             </td>
         </tr>
     </tbody>
 </table>
-<div class="form-group">
-    <label asp-for="Role"></label>
-    <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select text-dark" aria-required="true" style="width:auto">
-        <option disabled selected>Выберите роль</option>
-    </select>
-    <span asp-validation-for="Role" class="text-danger"></span>
-</div>
-<div>
-    <a class="btn btn-primary" asp-controller="Users" 
-                               asp-action="AddRoleToUser" 
-                               asp-route-userId="@Model.User.Id"
-                               asp-route-role="@Model.Role">Добавить</a>
-    <a class="btn btn-primary" asp-controller="Users" 
-                               asp-action="DeleteRoleUser" 
-                               asp-route-userIdd="@Model.User.Id"
-                               asp-route-role="@Model.Role">Удалить</a>
+<div class="container row ">
+    <div style="width:auto">
+        <form asp-controller="Users" asp-action="AddRoleToUser" method="post">
+            <div class="form-group">
+                <input asp-for="User.Id" type="hidden" />
+                <span asp-validation-for="Add" class="text-danger w-100"></span>
+                <label asp-for="Role" class="w-100"></label>
+                <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select text-dark" aria-required="true" style="width:auto">
+                    <option disabled selected>Выберите роль</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" asp-controller="Users"
+                        asp-action="AddRoleToUser">
+                    Добавить
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div style="width:auto">
+        <form asp-controller="Users" asp-action="DeleteRoleUser" method="post">
+            <div class="form-group">
+                <input asp-for="User.Id" type="hidden" />
+                <span asp-validation-for="Delete" class="text-danger w-100"></span>
+                <label asp-for="Role" class="w-100"></label>
+                <select asp-for="Role" asp-items="@Model.RolesList" class="custom-select text-dark" aria-required="true" style="width:auto">
+                    <option disabled selected>Выберите роль</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" asp-controller="Users"
+                        asp-action="DeleteRoleUser">
+                    Удалить
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

@@ -39,7 +39,7 @@ namespace PhoneBookWEB.Domain.Entities
         [Compare("Password", ErrorMessage = "Поля \"Пароль\" и \"Подтвердите пароль\" не совпадают.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Выберите поле \"Роль\"")]
+        //[Required(ErrorMessage = "Выберите поле \"Роль\"")]
         [Display(Name = "Роль")]
         public string Role { get; set; }
 

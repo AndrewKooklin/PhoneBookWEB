@@ -46,7 +46,7 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @if (UserRoles != null)
                         {
-                            @if (UserRoles.Roles.Any() && !String.IsNullOrEmpty(UserRoles.EMail))
+                            @if (!String.IsNullOrEmpty(UserRoles.EMail))
                             {
                                 <li class="nav-item ">
                                     <a id="manage" class="nav-link" style="color:darkred"><i>Hello @UserRoles.EMail!</i></a>

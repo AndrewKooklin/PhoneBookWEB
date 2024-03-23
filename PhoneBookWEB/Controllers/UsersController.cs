@@ -56,35 +56,131 @@ namespace PhoneBookWEB.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult AddRoleToUser(string userId, string role)
+        [HttpPost]
+        public IActionResult AddRoleToUser(UserWithRolesModel model)
         {
-            RoleUserModel model = new RoleUserModel
+            RoleUserModel roleUserModel = new RoleUserModel();
+            var user = _dataManager.Accounts.GetUserWithRoles(model.User.Id);
+            user.RolesList = roleNames.Select(i => new SelectListItem
             {
-                UserId = userId,
-                Role = role
-            };
-            
-            bool result = _dataManager.Accounts.AddRoleToUser(model);
-            if (result)
+                Text = i,
+                Value = i
+            });
+            if (model.Role == null)
             {
-                ModelState.AddModelError(string.Empty, "Role added.");
-                return RedirectToAction("UserDetails", "Users");
+                user.RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                ModelState.AddModelError("Add", "Выберите роль");
+                return View("UserDetails", user);
+            }
+            if (user.Roles.Contains(model.Role))
+            {
+                user.RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                ModelState.AddModelError("Add", "The User  already has a role.");
+                return View("UserDetails", user);
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "The User  already has a role.");
-                return RedirectToAction("UserDetails", "Users");
+                ModelState.AddModelError("Add", String.Empty);
+                roleUserModel.UserId = model.User.Id;
+                roleUserModel.Role = model.Role;
+
+                bool result = _dataManager.Accounts.AddRoleToUser(roleUserModel).GetAwaiter().GetResult();
+                if (result)
+                {
+                    user = _dataManager.Accounts.GetUserWithRoles(model.User.Id);
+                    user.RolesList = roleNames.Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    });
+                    ModelState.AddModelError("Add", "Role added.");
+                    return View("UserDetails", user);
+                }
+                else
+                {
+                    ModelState.AddModelError("Add", "Role is not added.");
+                    return View("UserDetails", user);
+                }
             }
         }
 
-        [HttpGet]
-        public IActionResult DeleteRoleUser(string userId, string role)
+        [HttpPost]
+        public IActionResult DeleteRoleUser(UserWithRolesModel model)
         {
-            //IdentityUser user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
-            //_userManager.DeleteAsync(user).GetAwaiter().GetResult();
+            RoleUserModel roleUserModel = new RoleUserModel();
+            var user = _dataManager.Accounts.GetUserWithRoles(model.User.Id);
+            user.RolesList = roleNames.Select(i => new SelectListItem
+            {
+                Text = i,
+                Value = i
+            });
+            if (!user.Roles.Any() || user.Roles.Count < 1)
+            {
+                user.RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                ModelState.AddModelError("Delete", "The User has no roles.");
+                return View("UserDetails", user);
+            }
+            if (model.Role == null)
+            {
+                user.RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                ModelState.AddModelError("Delete", "Выберите роль");
+                return View("UserDetails", user);
+            }
+            if (!user.Roles.Contains(model.Role))
+            {
+                user.RolesList = roleNames.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                ModelState.AddModelError("Delete", "The User has no role.");
+                return View("UserDetails", user);
+            }
+            else
+            {
+                ModelState.AddModelError("Delete", String.Empty);
+                roleUserModel.UserId = model.User.Id;
+                roleUserModel.Role = model.Role;
 
-            return RedirectToAction("Index");
+                bool result = _dataManager.Accounts.DeleteRoleUser(roleUserModel).GetAwaiter().GetResult();
+                if (result)
+                {
+                    user = _dataManager.Accounts.GetUserWithRoles(model.User.Id);
+                    user.RolesList = roleNames.Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    });
+                    ModelState.AddModelError("Delete", "Role removed.");
+                    return View("UserDetails", user);
+                }
+                else
+                {
+                    user.RolesList = roleNames.Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    });
+                    ModelState.AddModelError("Delete", "Role is not removed.");
+                    return View("UserDetails", user);
+                }
+            }
         }
     }
 }
