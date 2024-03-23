@@ -46,16 +46,6 @@ namespace PhoneBookWEB.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public IActionResult DeleteUser(string id)
-        {
-            //IdentityUser user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
-            //_userManager.DeleteAsync(user).GetAwaiter().GetResult();
-
-            return RedirectToAction("Index");
-        }
-
         [HttpPost]
         public IActionResult AddRoleToUser(UserWithRolesModel model)
         {
@@ -180,6 +170,34 @@ namespace PhoneBookWEB.Controllers
                     ModelState.AddModelError("Delete", "Role is not removed.");
                     return View("UserDetails", user);
                 }
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(string id)
+        {
+            bool resultRoles = _dataManager.Accounts.DeleteRolesUser(id).GetAwaiter().GetResult();
+            if (resultRoles)
+            {
+                bool resultUser = _dataManager.Accounts.DeleteUser(id).GetAwaiter().GetResult();
+                if (resultUser)
+                {
+                    var users = _dataManager.Accounts.GetUsers();
+                    ModelState.AddModelError(String.Empty, "User deleted.");
+                    return View("GetUsersList", users);
+                }
+                else
+                {
+                    ModelState.AddModelError(String.Empty, "User is not deleted.");
+                    var users = _dataManager.Accounts.GetUsers();
+                    return View("GetUsersList", users);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(String.Empty, "Roles for user is not removed.");
+                var users = _dataManager.Accounts.GetUsers();
+                return View("GetUsersList", users);
             }
         }
     }

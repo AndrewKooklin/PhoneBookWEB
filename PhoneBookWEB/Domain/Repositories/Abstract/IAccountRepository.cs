@@ -35,12 +35,9 @@ namespace PhoneBookWEB.Domain.Repositories.Abstract
 
         Task<bool> DeleteRoleUser(RoleUserModel model);
 
-        //Task<UserManager<IdentityUser>> GetUserManager();
+        Task<bool> DeleteRolesUser(string id);
 
-        //Task<SignInManager<IdentityUser>> GetSignInManager();
-
-        //Task<RoleManager<IdentityRole>> GetRoleManager();
-
+        Task<bool> DeleteUser(string id);
 
     }
 }

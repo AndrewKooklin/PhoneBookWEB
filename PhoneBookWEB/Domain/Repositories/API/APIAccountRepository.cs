@@ -230,49 +230,38 @@ namespace PhoneBookWEB.Domain.Repositories.API
             }
         }
 
-        //public async Task<UserManager<IdentityUser>> GetUserManager()
-        //{
-        //    urlRequest = $"{url}" + "APIRegister/GetUserManager";
-        //    using (_httpClient = new HttpClient())
-        //    {
-        //        using (response = await _httpClient.GetAsync(urlRequest))
-        //        {
-        //            string apiResponse = await response.Content.ReadAsStringAsync();
-        //            _userManager = JsonConvert.DeserializeObject<UserManager<IdentityUser>>(apiResponse);
-        //        }
-        //    }
-            
-        //    return _userManager;
-        //}
+        public async Task<bool> DeleteRolesUser(string id)
+        {
+            urlRequest = $"{url}" + "UsersAPI/DeleteRolesUser/" + $"{id}";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, id))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
 
-        //public async Task<SignInManager<IdentityUser>> GetSignInManager()
-        //{
-        //    urlRequest = $"{url}" + "APIRegister/GetSignInManager";
-        //    using (_httpClient = new HttpClient())
-        //    {
-        //        using (response = await _httpClient.GetAsync(urlRequest))
-        //        {
-        //             string apiResponse = await response.Content.ReadAsStringAsync();
-        //             _signInManager = JsonConvert.DeserializeObject<SignInManager<IdentityUser>>(apiResponse);
-        //        }
-        //    }
-            
-        //    return _signInManager;
-        //}
+            return apiResponseBoolean;
+        }
 
-        //public async Task<RoleManager<IdentityRole>> GetRoleManager()
-        //{
-        //    urlRequest = $"{url}" + "APIRegister/GetRoleManager";
-        //    using (_httpClient = new HttpClient())
-        //    {
-        //        using (response = await _httpClient.GetAsync(urlRequest))
-        //        {
-        //            string apiResponse = await response.Content.ReadAsStringAsync();
-        //            _roleManager = JsonConvert.DeserializeObject<RoleManager<IdentityRole>>(apiResponse);
-        //        }
-        //    }
-            
-        //    return _roleManager;
-        //}
+        public async Task<bool> DeleteUser(string id)
+        {
+            urlRequest = $"{url}" + "UsersAPI/DeleteUser/" + $"{id}";
+            using (_httpClient = new HttpClient())
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (response = await _httpClient.PostAsJsonAsync(urlRequest, id))
+                {
+                    apiResponse = await response.Content.ReadAsStringAsync();
+                    apiResponseBoolean = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+
+            return apiResponseBoolean;
+        }
     }
 }
