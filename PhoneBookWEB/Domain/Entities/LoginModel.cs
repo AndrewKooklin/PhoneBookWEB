@@ -10,20 +10,6 @@ namespace PhoneBookWEB.Domain.Entities
     [AllowAnonymous]
     public class LoginModel
     {
-        //[BindProperty]
-        //public InputModel Input { get; set; }
-
-        //public string ReturnUrl { get; set; }
-
-        //[TempData]
-        //public string ErrorMessage { get; set; }
-
-        //public class InputModel
-        //{
-        //[Required(ErrorMessage = "Заполните поле \"UserName\"")]
-        //[MinLength(3, ErrorMessage = "Длина не менее 3 символов")]
-        //public string UserName { get; set; }
-
         [Required(ErrorMessage = "Заполните поле \"Email\"")]
         [EmailAddress(ErrorMessage = "Поле Email формата name@site.com")]
         public string Email { get; set; }
@@ -36,6 +22,5 @@ namespace PhoneBookWEB.Domain.Entities
 
         [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
-        //}
     }
 }

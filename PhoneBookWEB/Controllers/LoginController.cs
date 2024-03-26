@@ -11,25 +11,20 @@ namespace PhoneBookWEB.Controllers
 {
     public class LoginController : Controller
     {
-        //private SignInManager<IdentityUser> _signInManager;
         private DataManager _dataManager;
 
-        public LoginController(/*SignInManager<IdentityUser> signInManager,*/
-                                DataManager dataManager)
+        public LoginController(DataManager dataManager)
         {
             _dataManager = dataManager;
-
         }
 
         public IActionResult LogInIndex()
         {
-
             return View();
         }
 
         public IActionResult LogInError()
         {
-
             return View("LogInError");
         }
 
