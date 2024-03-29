@@ -19,11 +19,7 @@ namespace PhoneBookWEB.Domain.Repositories.API
         private string urlRequest = "";
         private HttpResponseMessage response;
         private string apiResponse;
-        private string result;
         private bool apiResponseBoolean;
-        //private UserManager<IdentityUser> _userManager;
-        //private SignInManager<IdentityUser> _signInManager;
-        //private RoleManager<IdentityRole> _roleManager;
 
         private List<string> userRoles;
         private List<string> roleNames;
@@ -33,9 +29,6 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         public APIAccountRepository()
         {
-            //_httpClient = new HttpClient();
-            //_httpClient.DefaultRequestHeaders.Accept.Clear();
-            //_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<bool> CheckUserToDB(LoginModel model)
