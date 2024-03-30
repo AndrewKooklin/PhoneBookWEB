@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using PhoneBookWEB.Domain;
 using PhoneBookWEB.Domain.Entities;
 
@@ -12,13 +8,11 @@ namespace PhoneBookWEB.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly DataManager _dataManager;
 
         public HomeController(DataManager dataManager)
         {
             _dataManager = dataManager;
-            //if()
         }
 
         [HttpGet]
@@ -32,7 +26,6 @@ namespace PhoneBookWEB.Controllers
             {
                 List<PhoneBookRecord> records = null;
                 records = _dataManager.PhoneBookRecords.GetPhoneBookRecords().GetAwaiter().GetResult();
-                UserRoles userRoles = new UserRoles();
                 return View(records);
             }
         }

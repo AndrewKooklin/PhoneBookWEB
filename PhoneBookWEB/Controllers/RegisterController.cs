@@ -55,7 +55,6 @@ namespace PhoneBookWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _dataManager.Accounts.CreateUser(model);
                 if (result)
                 {
@@ -95,7 +94,6 @@ namespace PhoneBookWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _dataManager.Accounts.CreateUser(model);
                 if (result)
                 {
