@@ -80,11 +80,6 @@ namespace PhoneBookWEB.Domain.Repositories.API
             return roleNames;
         }
 
-        public Task<IdentityUser> GetUser(LoginModel model)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<IdentityRole> GetRoles()
         {
             urlRequest = $"{url}" + "RolesAPI/GetRoles";

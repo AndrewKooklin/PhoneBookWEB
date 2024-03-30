@@ -28,7 +28,6 @@ namespace PhoneBookWEB.Domain.Repositories.API
 
         public async Task<List<PhoneBookRecord>> GetPhoneBookRecords()
         {
-            
             urlRequest = $"{url}" + "Home/GetRecords";
             List<PhoneBookRecord> records = new List<PhoneBookRecord>();
             HttpResponseMessage response = null;
@@ -44,15 +43,6 @@ namespace PhoneBookWEB.Domain.Repositories.API
                 }
             }
             return records;
-
-            //IEnumerable<PhoneBookRecord> records = null;
-            //HttpResponseMessage response = _httpClient.GetAsync(urlRequest).GetAwaiter().GetResult();
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    records = response.Content.ReadFromJsonAsync<IEnumerable<PhoneBookRecord>>().GetAwaiter().GetResult();
-            //}
-            //return records;
         }
 
         public PhoneBookRecord GetPhoneBookRecordById(int id)
