@@ -2,14 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PhoneBookWEB.Domain.Entities
 {
     public class MyIdentityRole : IdentityRole
     {
-
         [Required(ErrorMessage = "Заполните поле \"Роль\"")]
         [MinLength(4, ErrorMessage = "Длина не менее 4 символов.")]
         [Display(Name = "Роль")]

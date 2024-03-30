@@ -11,18 +11,6 @@ namespace PhoneBookWEB.Domain.Entities
     [AllowAnonymous]
     public class RegisterModel
     {
-        //[BindProperty]
-        //public InputModel Input { get; set; }
-
-        //public string ReturnUrl { get; set; }
-
-        //public class InputModel
-        //{
-        //[Required(ErrorMessage = "Заполните поле \"UserName\"")]
-        //[MinLength(3, ErrorMessage = "Длина не менее 3 символов.")]
-        //[Display(Name = "UserName")]
-        //public string UserName { get; set; }
-
         [Required(ErrorMessage = "Заполните поле \"Email\"")]
         [EmailAddress(ErrorMessage = "Поле Email формата name@site.com")]
         [Display(Name = "Email")]
@@ -44,6 +32,5 @@ namespace PhoneBookWEB.Domain.Entities
         public string Role { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
-        //}
     }
 }
