@@ -37,7 +37,7 @@ namespace PhoneBookWEB
             services.AddTransient<IAccountRepository, APIAccountRepository>();
             services.AddTransient<IPhoneBookRecordRepository, APIPhoneBookRecordsRepository>();
             services.AddTransient<DataManager>();
-            services.AddTransient<UserRoles>();
+            services.AddTransient<UserRolesModel>();
 
             //настраиваем Identity систему
             services.AddIdentity<IdentityUser, IdentityRole>(opts =>

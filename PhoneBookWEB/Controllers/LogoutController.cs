@@ -18,8 +18,8 @@ namespace PhoneBookWEB.Controllers
         public IActionResult LogoutUser()
         {
             _dataManager.Accounts.LogoutUser();
-            UserRoles.EMail = "";
-            UserRoles.Roles = new List<string> { "Anonymus" };
+            UserRolesModel.EMail = "";
+            UserRolesModel.Roles = new List<string> { "Anonymus" };
             return RedirectToAction("Index", "Home");
         }
     }

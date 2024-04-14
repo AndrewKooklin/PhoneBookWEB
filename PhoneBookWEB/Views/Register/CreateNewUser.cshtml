@@ -1,5 +1,5 @@
 ﻿@model RegisterModel
-@inject UserRoles UserRoles
+@inject UserRolesModel UserRolesModel
 @{
     ViewData["Title"] = "Register new user";
 }
@@ -27,7 +27,7 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            @if (UserRoles.Roles.Contains("Admin"))
+            @if (UserRolesModel.Roles.Contains("Admin"))
             {
                 <div class="form-group">
                     <label asp-for="Role"></label>

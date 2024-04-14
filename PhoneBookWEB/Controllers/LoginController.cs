@@ -33,16 +33,16 @@ namespace PhoneBookWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserRoles.Roles = await _dataManager.Accounts.GetUserRoles(model);
-                if (UserRoles.Roles == null)
+                UserRolesModel.Roles = await _dataManager.Accounts.GetUserRoles(model);
+                if (UserRolesModel.Roles == null)
                 {
-                    UserRoles.EMail = model.Email;
-                    UserRoles.Roles = new List<string> { "Anonymus" };
+                    UserRolesModel.EMail = model.Email;
+                    UserRolesModel.Roles = new List<string> { "Anonymus" };
                     return RedirectToAction("Index", "Home");
                 }
-                else if(UserRoles.Roles != null)
+                else if(UserRolesModel.Roles != null)
                 {
-                    UserRoles.EMail = model.Email;
+                    UserRolesModel.EMail = model.Email;
 
                     return RedirectToAction("Index", "Home");
                 }
